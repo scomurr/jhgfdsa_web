@@ -1,0 +1,78 @@
+/* Body */
+body {
+    background-color: black;
+    color: white;  /* Ensure text is readable */
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header */
+  header {
+    background-color: purple;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between; /* Space out elements horizontally */
+  }
+  
+  header h1 {
+    color: white;
+    font-size: 2em;
+    margin: 0;
+  }
+  
+  header nav {
+    display: flex;
+  }
+  
+  header nav a {
+    color: white;
+    text-decoration: none; /* Remove underline */
+    padding: 5px;
+  }
+  
+  /* Image Container */
+  .image-container {
+    display: flex;
+    justify-content: space-between; /* Images on opposite sides */
+    margin: 10px auto;  /* Center the container horizontally */
+    height: 300px;
+    width: 600px;
+  }
+  
+  .image-container img {
+    width: 50%; /* Images are 50% of their container width */
+    height: auto;
+  }
+
+/* Login Form */
+.login-form {
+    display: flex;
+    flex-direction: column;  /* Stack form elements vertically */
+    align-items: center;  /* Center form elements horizontally */
+    margin: 50px auto;  /* Add some margin for spacing */
+    padding: 20px;
+    border: 1px solid #ccc;  /* Add a light border */
+    border-radius: 5px;  /* Round corners for a nicer look */
+    background-color: #9aebed;  /* Light background color */
+    color: black;
+  }
+  
+  .login-form label {
+    display: block;  /* Stack labels on top of each other */
+    margin-bottom: 5px;  /* Add some space between label and input */
+  }
+  
+  .login-form button {
+    margin-top: 10px;  /* Add space between form elements */
+    padding: 10px 20px;
+    background-color: purple;  /* Match header background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;  /* Indicate clickable button */
+  }
+  
+  .login-form button:hover {
+    background-color: #9b59b6;  /* Darken button on hover */
+  }
