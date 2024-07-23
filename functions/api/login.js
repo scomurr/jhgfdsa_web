@@ -1,7 +1,7 @@
 export async function onRequestPost(request) {
     // Check for POST request to "/api/login"
     if (request.method !== 'POST' || !request.url.endsWith('/api/login')) {
-        return new Response('Not Found:' + request.method + ": " + request.url, { status: 404 });
+        return new Response('BB Not Found:' + request.method + ": " + request.url, { status: 404 });
         }
     
         // Get username and password from request body
