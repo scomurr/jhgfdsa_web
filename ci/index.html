@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slideshow</title>
+    <style>
+        #imageContainer {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+        .image {
+            position: absolute;
+            max-width: 100%;
+            max-height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in, opacity .5s ease-out;
+        }
+        .visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="imageContainer"></div>
+
+    <script>
+        const imageContainer = document.getElementById('imageContainer');
+        const totalImages = 5;
+        let currentImage = 1;
+
+        function loadImages() {
+            for (let i = 1; i <= totalImages; i++) {
+                const img = document.createElement('img');
+                img.src = `${i}.png`;
+                img.alt = `Image ${i}`;
+                img.className = 'image';
+                if (i === 1) img.classList.add('visible');
+                imageContainer.appendChild(img);
+            }
+        }
+
+        function showNextImage() {
+            const currentImg = imageContainer.querySelector(`.image:nth-child(${currentImage})`);
+            currentImage = (currentImage % totalImages) + 1;
+            const nextImg = imageContainer.querySelector(`.image:nth-child(${currentImage})`);
+
+            currentImg.classList.remove('visible');
+            nextImg.classList.add('visible');
+        }
+
+        loadImages();
+        imageContainer.addEventListener('click', showNextImage);
+    </script>
+</body>
+</html>
