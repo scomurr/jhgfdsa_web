@@ -9,11 +9,11 @@ scriptTag.src = 'https://s.tpcserve.com/2/411638/analytics.js?dt=411638161912258
 
 // Generate a dt value and add to tag
 const tiValue = Math.random().toString(36).substr(2, 8);
-scriptTag.setAttribute('ti', tiValue);
+scriptTag.src += tiValue ? `?ti=${encodeURIComponent(tiValue)}` : '';
 
 // Find umt_source_platform - if it exists, append to tag
 const paramValue = new URLSearchParams(window.location.search).get('utm_source_platform');
-paramValue && scriptTag.setAttribute('c2', paramValue);
+scriptTag.src += tiValue ? `?ti=${encodeURIComponent(paramValue)}` : '';
 
 // Inject tag into DOM
 document.head.appendChild(scriptTag);
