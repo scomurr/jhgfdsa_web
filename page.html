@@ -8,8 +8,8 @@ const scriptTag = document.createElement('script');
 scriptTag.src = 'https://s.tpcserve.com/2/411638/analytics.js?dt=4116381619122588457000';
 
 // Generate a dt value and add to tag
-const dtValue = Math.random().toString(36).substr(2, 8);
-scriptTag.setAttribute('dt', dtValue);
+const tiValue = Math.random().toString(36).substr(2, 8);
+scriptTag.setAttribute('ti', tiValue);
 
 // Find umt_source_platform - if it exists, append to tag
 const paramValue = new URLSearchParams(window.location.search).get('utm_source_platform');
