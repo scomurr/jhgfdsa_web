@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Page with Ad Slots</title>
+    <style>
+        /* Basic styles for layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #bd11cc25;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            margin: 20px;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .sidebar {
+            width: 300px;
+            padding: 20px;
+        }
+        /* Ad slot styling */
+        .ad-banner {
+            display: block;
+            margin: 0 auto;           /* Ensures no extra vertical space around the ad */
+            width: 728px;             /* Sets exact width */
+            height: 90px;             /* Sets exact height */
+            background-color: #ccc;
+            text-align: center;
+            font-size: 20px;
+            color: #333;
+            border: 1px solid #999;
+        }
+
+        .sidebar-ad {
+            width: 300px;
+            height: 250px;
+            background-color: #ddd;
+            text-align: center;
+            line-height: 250px;
+            font-size: 20px;
+            color: #333;
+            border: 1px solid #999;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+    // init the dataLayer if it not there
+    window.dataLayer = window.dataLayer || [];
+
+    // Listen for `postMessage` requests from the iframe
+    window.addEventListener('message', (event) => {
+        console.log("Caught a click event from an ad slot");
+        
+        if (event.data && event.data.type === 'request-click-permission') {
+            
+            // Check if there are any `miDec` events in dataLayer
+            const hasMiDec = window.dataLayer.filter(e => e.event === 'miDec').length > 0;
+            
+            // Respond to the iframe with the result of the `miDec` check
+            event.source.postMessage({ type: 'click-response', miDec: hasMiDec }, event.origin);
+        }
+    });
+    </script>
+    <script src="https://s.tpcserve.com/2/411638/minimal.js?dt=4116381729692600210000&pd=mkt" async="true"></script>
+</head>
+<body>
+
+    <!-- Top banner ad slot -->
+    <div class="ad-banner">
+        <iframe src="/sample_iframe_banner.html" width="728" height="90" style="border: 0;"></iframe>
+    </div>
+
+    <!-- Page content with sidebar ad slot -->
+    <div class="container">
+        <div class="content">
+            <h1>Welcome to Our Sample Page</h1>
+            <p>This is a sample page with embedded ad slots. You can place content here and test ad placements in the banners.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula sem at purus lacinia, nec ultrices nisi ullamcorper. Curabitur bibendum risus sit amet felis tempor, nec feugiat magna efficitur.</p>
+            <p>Aliquam erat volutpat. Integer et dui id orci dapibus accumsan at nec eros. Cras ac risus nec lorem hendrerit tincidunt a eget leo.</p>
+        </div>
+
+        <!-- Sidebar with ad slot -->
+        <aside class="sidebar">
+            <div class="sidebar-ad">Sidebar Ad (300x250)</div>
+            <p>Additional sidebar content here. This section could contain links, additional text, or other elements.</p>
+        </aside>
+    </div>
+
+    <!-- Bottom banner ad slot -->
+    <div class="ad-banner">
+        <iframe src="/sample_iframe_banner.html" width="728" height="90" style="border: 0;"></iframe>
+    </div>
+
+</body>
+</html>

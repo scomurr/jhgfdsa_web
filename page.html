@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head><title>Tag Test Page</title></head>
+<body>
+    <script>
+
+// Create the script tag to be added to DOM
+const scriptTag = document.createElement('script');
+scriptTag.src = 'https://s.tpcserve.com/2/411638/analytics.js?dt=4116381619122588457000';
+
+// Generate a dt value and add to tag
+const dtValue = Math.random().toString(36).substr(2, 8);
+scriptTag.setAttribute('dt', paramValue);
+
+// Find umt_source_platform - if it exists, append to tag
+const paramValue = new URLSearchParams(window.location.search).get('utm_source_platform');
+paramValue && scriptTag.setAttribute('c2', paramValue);
+
+// Inject tag into DOM
+document.head.appendChild(scriptTag);
+
+    </script>
+
+    Check the console to make sure the right info gets appended to the tag
+</body>

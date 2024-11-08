@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Slot</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            background-color: transparent;
+        }
+
+        /* Ensuring the ad occupies exactly 728x90 pixels */
+        #ad-container {
+            width: 728px;
+            height: 90px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #ad-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div id="ad-container">
+        <a href="/" target="_top">
+            <img src="/images/banner_ad.jpeg" alt="Banner Ad">
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('click', async (event) => {
+            console.log("caught a click within the iframe");
+            setTimeout(()=>{
+                console.log("waiting");
+            },5000);
+            if (event.target.tagName === 'A') {
+                event.preventDefault();
+
+                window.parent.postMessage({ type: 'request-click-permission' }, '*');
+
+                const allowClick = await new Promise((resolve) => {
+                    function handleResponse(e) {
+                        if (e.data && e.data.type === 'click-response') {
+                            window.removeEventListener('message', handleResponse);
+                            resolve(e.data.miDec === false);
+                        }
+                    }
+                    window.addEventListener('message', handleResponse);
+                });
+
+                if (allowClick) {
+                    console.log("Click allowed");
+                    //window.location.href = event.target.href;
+                }
+            }
+        });
+
+        window.addEventListener('message', (event) => {
+            if (event.data && event.data.type === 'click-response') {
+                document.body.style.backgroundColor = event.data.miDec ? 'red' : 'green';
+            }
+        });
+    </script>
+</body>
+</html>
