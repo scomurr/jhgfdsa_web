@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protected Page</title>
+</head>
+<body>
+  <div id="content">Loading...</div>
+
+  <script>
+    // Retrieve the token from local storage
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+      // If no token is found, redirect to the login page
+      alert('Not authenticated. Please log in.');
+      window.location.href = '/login';
+    } else {
+      // Make a fetch request with the Authorization header
+      fetch(window.location.href, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        if (response.status === 401) {
+          // If unauthorized, redirect to login
+          alert('Unauthorized access!');
+          window.location.href = '/login';
+        } else {
+          return response.text(); // Retrieve the content
+        }
+      })
+      .then(content => {
+        // Display the content if authorized
+        document.getElementById('content').textContent = 'Welcome to the protected content!';
+      })
+      .catch(err => {
+        console.error('Error fetching protected content:', err);
+        document.getElementById('content').textContent = 'Error loading content.';
+      });
+    }
+  </script>
+</body>
+</html>
