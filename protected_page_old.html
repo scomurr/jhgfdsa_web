@@ -7,7 +7,6 @@
 </head>
 <body>
   <div id="content">Loading...</div>
-  <button id="logoutButton">Logout</button>
 
   <script>
     // Retrieve the token from local storage
@@ -42,13 +41,6 @@
         document.getElementById('content').textContent = 'Error loading content.';
       });
     }
-
-    // Logout button functionality
-    document.getElementById('logoutButton').addEventListener('click', function() {
-      localStorage.removeItem('authToken'); // Remove the token
-      alert('You have been logged out.');
-      window.location.href = '/login'; // Redirect to the login page
-    });
   </script>
 </body>
 </html>
