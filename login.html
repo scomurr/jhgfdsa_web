@@ -3,54 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <script type="text/javascript" src="https://cadmus.script.ac/d3tcw7ra1ojj1j/script.js"></script>
-  <script src="//client.px-cloud.net/PXmk5EOzVr/main.min.js" async></script>
-  <!-- <script src="https://s.tpcserve.com/2/411638/analytics.js?dt=4116381619122588457000" async="true"></script> -->
-  <script>window.dataLayer = window.dataLayer || [];</script>
-  <script src="https://s.tpcserve.com/2/411638/minimal.js?dt=4116381729692600210000&pd=mkt" async="true"></script>
+  <title>Login</title>
 </head>
 <body>
-  <header>
-    <h1>My Website</h1>
-    <nav>
-      <a href="/index.html">Home</a>
-    </nav>
-  </header>
-  <main>
-    <section class="login-form">
-      <h2>Login</h2>
-      <form action="/api/login" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">Login</button>
-      </form>
-      <p id="message"></p>
-    </section>
-  </main>
+  <h1>Login</h1>
+  <form id="loginForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <button type="submit">Login</button>
+  </form>
   <script>
-  // Handle form submission with JavaScript (using Fetch API)
-  const form = document.querySelector('.login-form form');
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
 
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'  // Required for form data
-      },
-      body: `username=${username}&password=${password}`  // Encode data
+      // Static credentials for demonstration
+      const validUsername = 'testuser';
+      const validPassword = 'testpassword';
+
+      if (username === validUsername && password === validPassword) {
+        // Create a simple JWT token (header.payload.signature structure, but signature is left empty for simplicity)
+        const header = { alg: 'none', typ: 'JWT' };
+        const payload = {
+          sub: username,
+          name: 'Demo User',
+          iat: Math.floor(Date.now() / 1000)
+        };
+
+        // Encode header and payload to Base64URL
+        function base64UrlEncode(obj) {
+          return btoa(JSON.stringify(obj)).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+        }
+
+        const jwt = `${base64UrlEncode(header)}.${base64UrlEncode(payload)}.`; // Unsigned JWT for simplicity
+
+        // Store the token in localStorage
+        localStorage.setItem('authToken', jwt);
+
+        alert('Login successful! Token has been issued.');
+        window.location.href = '/protected-page'; // Redirect to protected page
+      } else {
+        alert('Invalid username or password. Please try again.');
+      }
     });
-
-    const message = await response.text();
-    document.getElementById('message').textContent = message;
-  });
   </script>
 </body>
 </html>
