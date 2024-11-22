@@ -26,5 +26,10 @@
             let code = 'console.log("Hello World!");';
             eval(code);
         </script> -->
+        <script>
+            let functionCode = "console.log('Result string of a new function')";
+            let myFunction = new Function(functionCode);
+            myFunction();
+        </script>
     </body>
 </html>
