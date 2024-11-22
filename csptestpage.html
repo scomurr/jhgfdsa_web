@@ -32,8 +32,9 @@
             myFunction();
         </script> -->
         <script>
-            setTimeout("console.log('setTimeout – logged to console')", 1000);
-            setInterval("console.log('setInterval – logged to console')", 1000);
+            let code = "console.log('Worker console.log')";
+            let blob = new Blob([code], { type: 'application/javascript' });
+            const worker = new Worker(URL.createObjectURL(blob));
         </script>
     </body>
 </html>
