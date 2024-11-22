@@ -26,10 +26,14 @@
             let code = 'console.log("Hello World!");';
             eval(code);
         </script> -->
-        <script>
+        <!-- <script>
             let functionCode = "console.log('Result string of a new function')";
             let myFunction = new Function(functionCode);
             myFunction();
+        </script> -->
+        <script>
+            setTimeout("console.log('setTimeout – logged to console')", 1000);
+            setInterval("console.log('setInterval – logged to console')", 1000);
         </script>
     </body>
 </html>
