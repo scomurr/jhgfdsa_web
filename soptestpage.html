@@ -22,12 +22,14 @@
                 }
 
                 const data = await response.json();
-                document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+                const resultElement = document.getElementById('result');
+                resultElement.textContent = JSON.stringify(data, null, 2);
+                resultElement.style.backgroundColor = 'lightgreen'; 
             } catch (error) {
                 console.error('Error fetching data:', error);
                 const resultElement = document.getElementById('result');
                 resultElement.textContent = 'Failed to fetch data. Check the console for details.';
-                resultElement.style.backgroundColor = 'lightpink'; // Set background color to light pink
+                resultElement.style.backgroundColor = 'lightpink'; 
             }
         }
 
@@ -44,12 +46,14 @@
                 }
 
                 const data = await response.json();
-                document.getElementById('sopResult').textContent = JSON.stringify(data, null, 2);
+                const sopResultElement = document.getElementById('sopResult');
+                sopResultElement.textContent = JSON.stringify(data, null, 2);
+                sopResultElement.style.backgroundColor = 'lightgreen';
             } catch (error) {
                 console.error('Error fetching data:', error);
                 const sopResultElement = document.getElementById('sopResult');
                 sopResultElement.textContent = 'Failed to fetch data. Check the console for details.';
-                sopResultElement.style.backgroundColor = 'lightpink'; // Set background color to light pink
+                sopResultElement.style.backgroundColor = 'lightpink';
             }
         }
 
