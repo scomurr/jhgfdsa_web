@@ -25,7 +25,9 @@
                 document.getElementById('result').textContent = JSON.stringify(data, null, 2);
             } catch (error) {
                 console.error('Error fetching data:', error);
-                document.getElementById('result').textContent = 'Failed to fetch data. Check the console for details.';
+                const resultElement = document.getElementById('result');
+                resultElement.textContent = 'Failed to fetch data. Check the console for details.';
+                resultElement.style.backgroundColor = 'lightpink'; // Set background color to light pink
             }
         }
 
@@ -45,7 +47,9 @@
                 document.getElementById('sopResult').textContent = JSON.stringify(data, null, 2);
             } catch (error) {
                 console.error('Error fetching data:', error);
-                document.getElementById('sopResult').textContent = 'Failed to fetch data. Check the console for details.';
+                const sopResultElement = document.getElementById('sopResult');
+                sopResultElement.textContent = 'Failed to fetch data. Check the console for details.';
+                sopResultElement.style.backgroundColor = 'lightpink'; // Set background color to light pink
             }
         }
 
