@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Test</title>
+</head>
+<body>
+    <h1>SOP Test Page</h1>
+    <div id="result">Loading...</div>
+
+    <script>
+        // Function to fetch JSON and display it in the DOM
+        async function fetchData() {
+            try {
+                const response = await fetch('https://api.jhgfdsa.com/rest/info');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                document.getElementById('result').textContent = 'Failed to fetch data. Check the console for details.';
+            }
+        }
+
+        // Call the function on page load
+        fetchData();
+    </script>
+</body>
+</html>
