@@ -62,5 +62,14 @@
         // Call the function on page load
         fetchData();
     </script>
+    <script>
+        const iframe = document.getElementById('hydroIframe');
+        try {
+            const iframeContent = iframe.contentDocument.body.innerHTML;
+            console.log('Iframe content:', iframeContent);
+        } catch (error) {
+            console.error('Error accessing iframe content:', error);
+        }
+    </script>
 </body>
 </html>
