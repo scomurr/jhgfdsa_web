@@ -71,8 +71,21 @@
             hhhResultElement.textContent = iframeContent;
             hhhResultElement.style.backgroundColor = 'lightgreen';
         } catch (error) {
-            console.error('Error accessing iframe content:', error);
+            console.error('Error fetching data:', error);
+            const hhhResultElement = document.getElementById('hhhResult');
+            hhhResultElement.textContent = 'Failed to fetch data. Check the console for details.';
+            hhhResultElement.style.backgroundColor = 'lightpink';
         }
+    </script>
+    <script>
+        fetch('https://api.jhgfdsa.com/rest/info', {
+            method: 'PUT',
+            body: JSON.stringify({ test: 'data' }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => console.log(response))
+        .catch(error => console.error(error));
     </script>
 </body>
 </html>
