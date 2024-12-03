@@ -12,6 +12,7 @@
     <h2>Cross-Origin</h2>
     <div id="result">Loading...</div>
     <h2>Hydrohousehold Iframe</h2>
+    <div id="hhhResult">Loading...</div>
     <iframe id="hydroIframe" src="https://hydrohousehold.com" width="600" height="400"></iframe>
 
     <script>
@@ -66,7 +67,9 @@
         const iframe = document.getElementById('hydroIframe');
         try {
             const iframeContent = iframe.contentDocument.body.innerHTML;
-            console.log('Iframe content:', iframeContent);
+            const hhhResultElement = document.getElementById('hhhResult');
+            hhhResultElement.textContent = iframeContent;
+            hhhResultElement.style.backgroundColor = 'lightgreen';
         } catch (error) {
             console.error('Error accessing iframe content:', error);
         }
