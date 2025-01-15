@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<body>
+    <div id="display"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const params = Array.from(urlParams.entries()).map(([key, value]) => `${key}: ${value}`);
+            console.log(params);
+            
+            const displayDiv = document.getElementById('display');
+            displayDiv.innerHTML = params.join('<br>');
+
+            // Remove query parameters from the URL
+            const urlWithoutParams = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, urlWithoutParams);
+        });
+    </script>
+</body>
