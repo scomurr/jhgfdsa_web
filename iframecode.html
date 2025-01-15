@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <body>
+    <div>This is the iframe</div>
     <div id="display"></div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const params = Array.from(urlParams.entries()).map(([key, value]) => `${key}: ${value}`);
             console.log(params);
-            
+
             const displayDiv = document.getElementById('display');
             displayDiv.innerHTML = params.join('<br>');
 
