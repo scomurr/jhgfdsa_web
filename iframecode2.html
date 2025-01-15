@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<body>
+    <div id="display"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const urlParams = new URLSearchParams(window.parent.location.search);
+                const params = Array.from(urlParams.entries()).map(([key, value]) => `${key}: ${value}`);
+                
+                const displayDiv = document.getElementById('display');
+                displayDiv.innerHTML = params.join('<br>');
+            } catch (error) {
+                console.error('Unable to access parent location. Ensure same-origin policy is met.', error);
+            }
+        });
+    </script>
+</body>
